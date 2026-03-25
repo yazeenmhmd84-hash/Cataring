@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Variety Catering & Events | Premium Digital Menu</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;800&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --accent-orange: #f59e0b;
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --card-glow: linear-gradient(145deg, rgba(245, 158, 11, 0.12), rgba(0, 0, 0, 0.95));
+        }
+
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background: #080808; 
+            color: #e5e7eb; 
+            margin: 0; 
+            overflow-x: hidden; 
+            scroll-behavior: smooth; 
+        }
+
+        h1, h2, h3, .heading-font { 
+            font-family: 'Poppins', sans-serif; 
+        }
+
+        /* Glassmorphism Effect */
+        .glass-premium { 
+            background: var(--glass-bg); 
+            backdrop-filter: blur(12px); 
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08); 
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Gradient Glow Card */
+        .glow-card {
+            background: var(--card-glow);
+            border: 1px solid rgba(245, 158, 11, 0.15);
+            box-shadow: 0 10px 40px rgba(245, 158, 11, 0.1);
+            transition: 0.4s ease;
+        }
+        .glow-card:hover {
+            box-shadow: 0 15px 50px rgba(245, 158, 11, 0.2);
+            transform: translateY(-5px);
+        }
+
+        /* Intro Screen */
+        .intro-screen { position: fixed; inset: 0; z-index: 999; background: #000; display: flex; align-items: center; justify-content: center; transition: 1s ease-in-out; }
+
+        /* Navigation Style */
+        .active-page { display: block !important; animation: fadeIn 0.6s ease-out; }
+        .page-content { display: none; padding-bottom: 120px; }
+
+        /* Premium Visual Cards */
+        .visual-card { 
+            height: 220px; 
+            position: relative; 
+            border-radius: 32px; 
+            overflow: hidden; 
+            margin-bottom: 24px; 
+            cursor: pointer;
+            transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .visual-card img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.4) grayscale(20%); transition: 0.8s; }
+        .visual-card:hover img { transform: scale(1.1); filter: brightness(0.6) grayscale(0%); }
+        
+        /* Floating Animation */
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+        .animate-float { animation: float 6s ease-in-out infinite; }
+
+        .back-btn { background: rgba(255, 255, 255, 0.05); color: #fff; padding: 12px 24px; border-radius: 18px; font-weight: 600; display: inline-flex; align-items: center; gap: 10px; margin-bottom: 30px; border: 1px solid rgba(255,255,255,0.1); }
+    </style>
+</head>
+<body>
+
+    <div id="intro-page" class="intro-screen flex-col text-center p-6">
+        <div class="animate__animated animate__fadeIn">
+            <h1 class="text-6xl font-black tracking-tighter text-white mb-2">VARIETY</h1>
+            <div class="h-1 w-12 bg-orange-500 mx-auto mb-4"></div>
+            <p class="text-[9px] tracking-[0.8em] text-gray-500 uppercase font-medium">Taste of Traditions</p>
+        </div>
+        <button onclick="startExperience()" class="mt-24 glass-premium text-white px-12 py-4 rounded-full font-bold tracking-widest text-xs border border-orange-500/20 active:scale-95 transition-all">
+            EXPLORE THE MENU
+        </button>
+    </div>
+
+    <div id="main-app" class="hidden">
+        
+        <header class="p-6 flex justify-between items-center sticky top-0 z-50 bg-black/80 backdrop-blur-xl border-b border-white/5">
+            <h1 class="text-xl font-black text-white tracking-tighter">VARIETY<span class="text-orange-500">.</span></h1>
+            <div class="flex gap-6 items-center">
+                <a href="tel:918594060114" class="text-gray-400 hover:text-orange-500 transition-colors"><i class="fas fa-phone-alt"></i></a>
+                <a href="https://wa.me/918594060114" class="bg-orange-500/10 text-orange-500 px-4 py-2 rounded-xl text-sm font-bold border border-orange-500/20">Chat</a>
+            </div>
+        </header>
+
+        <main id="home-page" class="page-content active-page p-6">
+            <div class="mb-10">
+                <p class="text-orange-500 text-[10px] tracking-[0.4em] font-bold uppercase mb-2">Since 1996</p>
+                <h2 class="text-4xl font-black text-white">Digital <span class="text-gray-500">Curated</span> Menu</h2>
+            </div>
+            
+            <div class="grid gap-2">
+                <div class="visual-card" onclick="navigateTo('drinks-page')">
+                    <img src="https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?w=800">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                    <div class="absolute bottom-6 left-6">
+                        <h3 class="text-2xl font-bold tracking-tight">Welcome Drinks</h3>
+                        <p class="text-xs text-orange-500/80 font-medium">Fresh & Refreshing</p>
+                    </div>
+                </div>
+
+                <div class="visual-card" onclick="navigateTo('main-page')">
+                    <img src="https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=800">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                    <div class="absolute bottom-6 left-6">
+                        <h3 class="text-2xl font-bold tracking-tight">Main Course</h3>
+                        <p class="text-xs text-orange-500/80 font-medium">Traditional Masterpieces</p>
+                    </div>
+                </div>
+
+                <div class="visual-card" onclick="navigateTo('live-page')">
+                    <img src="https://images.unsplash.com/photo-1594631252845-29fc4586c567?w=800">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                    <div class="absolute bottom-6 left-6">
+                        <h3 class="text-2xl font-bold tracking-tight">Live Counters</h3>
+                        <p class="text-xs text-orange-500/80 font-medium">Freshly Prepared</p>
+                    </div>
+                </div>
+            </div>
+
+            <section class="mt-12">
+                <div class="glow-card p-10 rounded-[40px] text-center animate-float">
+                    <i class="fas fa-quote-left text-orange-500/30 text-4xl mb-6"></i>
+                    <p class="text-lg leading-relaxed text-gray-200 font-medium mb-8">
+                        "ഏറ്റവും മികച്ച രുചിയും, കുടുംബത്തിന്റെ സ്നേഹവും ചേർന്ന അനുഭവം നിങ്ങൾക്ക് സമ്മാനിക്കാൻ സാധിക്കുന്നതിൽ ഞങ്ങൾ അതിയായി സന്തോഷിക്കുന്നു."
+                    </p>
+                    <div class="space-y-1">
+                        <h4 class="text-lg font-extrabold tracking-widest text-white uppercase">Shihab</h4>
+                        <p class="text-[9px] text-orange-500 font-bold tracking-[0.3em] uppercase">The Visionary</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="mt-16">
+                <div class="flex justify-between items-end mb-8">
+                    <h3 class="text-2xl font-black">Guest <span class="text-gray-500 italic">Stories</span></h3>
+                    <div class="h-[1px] flex-1 bg-white/10 mx-4 mb-3"></div>
+                </div>
+                
+                <div class="flex overflow-x-auto gap-4 pb-6 no-scrollbar">
+                    <div class="min-w-[280px] glass-premium p-8 rounded-[35px]">
+                        <div class="flex text-orange-500 mb-4 text-[10px]"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                        <p class="text-sm text-gray-400 leading-relaxed italic mb-6">"Variety-ne trust cheyyaam! Professionalism at its best. Food nalla tasty aayirunnu."</p>
+                        <h5 class="text-xs font-bold text-white uppercase tracking-tighter">— Rahul K, Kozhikode</h5>
+                    </div>
+                    <div class="min-w-[280px] glass-premium p-8 rounded-[35px]">
+                        <div class="flex text-orange-500 mb-4 text-[10px]"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                        <p class="text-sm text-gray-400 leading-relaxed italic mb-6">"Live counter biryani poli aanu. Menu variety-um perfect timing-um aayirunnu."</p>
+                        <h5 class="text-xs font-bold text-white uppercase tracking-tighter">— Ameer, Koduvally</h5>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <section id="drinks-page" class="page-content p-6">
+            <button onclick="navigateTo('home-page')" class="back-btn"><i class="fas fa-chevron-left text-xs"></i> BACK</button>
+            <h2 class="text-4xl font-black mb-8">Welcome <span class="text-orange-500">Drinks</span></h2>
+            <div class="space-y-4">
+                <div class="glass-premium p-6 rounded-3xl border-l-2 border-orange-500">
+                    <h4 class="font-bold text-lg mb-1">Mint Lime Cooler</h4>
+                    <p class="text-xs text-gray-500">Refreshing mint and lime blend.</p>
+                </div>
+                <div class="glass-premium p-6 rounded-3xl border-l-2 border-blue-500">
+                    <h4 class="font-bold text-lg mb-1">Blue Curacao Punch</h4>
+                    <p class="text-xs text-gray-500">Premium tropical experience.</p>
+                </div>
+            </div>
+        </section>
+
+        <nav class="fixed bottom-8 left-8 right-8 h-20 glass-premium rounded-[30px] flex items-center justify-around z-[100] border-white/10">
+            <button onclick="navigateTo('home-page')" class="text-xl text-orange-500"><i class="fas fa-home"></i></button>
+            <div class="w-[1px] h-6 bg-white/10"></div>
+            <button onclick="navigateTo('about-page')" class="text-xl text-gray-500"><i class="fas fa-info-circle"></i></button>
+            <div class="w-[1px] h-6 bg-white/10"></div>
+            <a href="https://wa.me/918594060114" class="text-xl text-green-500"><i class="fab fa-whatsapp"></i></a>
+        </nav>
+    </div>
+
+    <script>
+        function startExperience() {
+            const intro = document.getElementById('intro-page');
+            const main = document.getElementById('main-app');
+            intro.style.opacity = '0';
+            setTimeout(() => {
+                intro.style.display = 'none';
+                main.classList.remove('hidden');
+                main.classList.add('animate__animated', 'animate__fadeIn');
+            }, 800);
+        }
+
+        function navigateTo(pageId) {
+            document.querySelectorAll('.page-content').forEach(p => p.classList.remove('active-page'));
+            document.getElementById(pageId).classList.add('active-page');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
